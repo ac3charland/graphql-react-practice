@@ -1,18 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
 import App from './app'
 import './index.scss'
 import * as serviceWorker from './serviceWorker'
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from '@apollo/client'
 
-import makeStore from './store'
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache(),
+})
 
-const store = makeStore()
+export const GET_ALL_FILMS = gql`
+  query GetFilms {
+    films {
+      title
+    }
+  }
+`
 
 ReactDOM.render(
-  <Provider store={store}>
+  <ApolloProvider client={client}>
     <App />
-  </Provider>,
+  </ApolloProvider>,
   document.getElementById('root')
 )
 
