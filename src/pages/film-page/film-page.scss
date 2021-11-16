@@ -1,0 +1,80 @@
+@import '../../globals.scss';
+
+.film-page {
+    min-height: 100vh;
+    color: white;
+
+    &__back {
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        z-index: 2;
+
+        @include transition(transform 0.2s);
+
+        &:hover {
+            @include scale(1.3);
+        }
+    }
+
+    &__banner-container {
+        height: 60vh;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            filter: blur(5px);
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+    &__below-banner {
+        display: flex;
+    }
+
+    &__poster-container {
+        position: relative;
+        margin-top: -40rem;
+        margin-left: 10rem;
+        min-width: 50rem;
+
+        img {
+            width: 100%;
+            z-index: 2;
+        }
+    }
+
+    &__text-wrapper {
+        margin: 5rem 2rem 5rem 10rem;
+        flex-shrink: 2;
+
+    }
+
+    &__title {
+        font-size: 10rem;
+        font-weight: 200;
+    }
+
+    &__released {
+        font-size: 5rem;
+        margin-bottom: 8rem;
+        font-weight: 100;
+    }
+
+    &__description {
+        font-size: 3rem;
+        margin-bottom: 5rem;
+    }
+
+    &__creator {
+        font-size: 3rem;
+        font-weight: 100;
+    }
+
+    &__rt-score {
+        font-weight: 900;
+        font-size: 3rem;
+    }
+}

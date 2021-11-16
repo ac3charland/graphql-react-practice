@@ -7,21 +7,12 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql,
 } from '@apollo/client'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
 })
-
-export const GET_ALL_FILMS = gql`
-  query GetFilms {
-    films {
-      title
-    }
-  }
-`
 
 ReactDOM.render(
   <ApolloProvider client={client}>

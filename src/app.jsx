@@ -1,35 +1,44 @@
-import React from 'react'
+import React, {useReducer} from 'react'
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom'
-import NavBar from './components/nav-bar/nav-bar'
-import Footer from './components/footer/footer'
+import FilmPage from './pages/film-page/film-page'
 import HomePage from './pages/home-page/home-page'
 import SecondaryPage from './pages/secondary-page/secondary-page'
-import {NAVBAR_HEIGHT, SECONDARY_PAGE_URL} from './utils/constants'
-import {useQuery} from '@apollo/client'
-import {GET_ALL_FILMS} from '.'
+import {SECONDARY_PAGE_URL} from './utils/constants'
+
+export const StoreContext = React.createContext()
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'set':
+            return {
+                ...state,
+                backgroundColor: action.payload,
+            }
+        default:
+            throw new Error()
+    }
+}
+
+const initialState = {
+    backgroundColor: '#444',
+}
 
 const App = () => {
-
-    const {data} = useQuery(GET_ALL_FILMS)
-    // eslint-disable-next-line
-    console.log({data})
+    const [state, dispatch] = useReducer(reducer, initialState)
 
     return (
         <React.StrictMode>
-            <Router>
-                <div className='content-wrapper' style={{minHeight: `calc(100vh - ${NAVBAR_HEIGHT + 2}rem)`}}>
-                    <NavBar />
-                    <div className='flex' style={{minHeight: `calc(100vh - ${NAVBAR_HEIGHT + 2}rem)`, marginTop: `${NAVBAR_HEIGHT + 2}rem`}}>
-                        <div className='page-wrapper'>
-                            <Switch>
-                                <Route exact path='/' component={HomePage} />
-                                <Route exact path={SECONDARY_PAGE_URL} component={SecondaryPage} />
-                            </Switch>
-                        </div>
-                        <Footer />
+            <StoreContext.Provider value={{state, dispatch}}>
+                <Router>
+                    <div className='page-wrapper'>
+                        <Switch>
+                            <Route exact path='/' component={HomePage} />
+                            <Route path='/film' component={FilmPage} />
+                            <Route exact path={SECONDARY_PAGE_URL} component={SecondaryPage} />
+                        </Switch>
                     </div>
-                </div>
-            </Router>
+                </Router>
+            </StoreContext.Provider>
         </React.StrictMode>
     )
 }
