@@ -8,11 +8,34 @@
   display: flex;
   flex-direction: column;
 
+  &__title-wrapper {
+    margin: 3rem 0 1rem 5rem;
+    color: white;
+    a {
+      color: white;
+      @include transition(color 0.1s);
+    }
+  }
+
   &__heading {
-    margin: 5rem 0 5rem 5rem;
     font-size: 10rem;
     font-weight: 300;
-    color: white;
+    margin-left: -0.5rem;
+  }
+
+  &__description {
+    font-weight: 100;
+  }
+  
+  &__repos {
+    font-weight: 100;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    
+    a {
+      text-decoration: none;
+      margin-right: 3rem;
+    }
   }
 
   &__tiles-wrapper {
