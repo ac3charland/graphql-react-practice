@@ -10,7 +10,7 @@ import {
 } from '@apollo/client'
 
 const client = new ApolloClient({
-  uri: process.env.SERVER_URI || 'http://localhost:4000',
+  uri: process.env.REACT_APP_SERVER_URI || 'http://localhost:4000',
   cache: new InMemoryCache(),
 })
 
