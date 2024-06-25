@@ -17,7 +17,7 @@ const FilmTile = ({title, director, image, yearReleased}) => {
             .then(color => {
                 setColor(color.hex)
             })
-    }, [])
+    }, [image, setColor])
 
     const onMouseEnter = () => {
         dispatch({type: 'set', payload: color})
